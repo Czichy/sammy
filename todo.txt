@@ -1,0 +1,16 @@
+Sammy TODO
+--------
+* speed up DKB collector with more selective download
+* log viewer window
+
+Done
+----
+* dummy collector for test purposes (CollectorSample)
+* add salt to encryption
+* timeout for HTML scraping
+* exception handling in scrape window
+* add statements view (DataGridView)
+* factor out collectors into plugin dlls
+* fix FinTs assembly loading in Hbci
+* add HBCI admin button to settings dialog
+* write wiki page for configuration script
