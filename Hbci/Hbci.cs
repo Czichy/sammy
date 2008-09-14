@@ -115,7 +115,7 @@ namespace Sidi.Sammy.Hbci
             Payment p = new Payment();
 
             p.Currency = s.Currency;
-            p.Value = s.DecValue;
+            p.Value = (double) s.DecValue;
             p.EntryDate = s.EntryDate.ToDateTime();
             p.ValueDate = s.ValueDate.ToDateTime();
             p.EntryText = s.EntryText;

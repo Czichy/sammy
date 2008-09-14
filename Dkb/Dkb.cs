@@ -64,7 +64,7 @@ namespace Sidi.Sammy.Dkb
                     p.AcctNo = String.Empty;
                     p.BankCode = String.Empty;
                     string[] att = System.Text.RegularExpressions.Regex.Split(i["amountToTransfer"], "\\s+");
-                    p.Value = Decimal.Parse(att[0]);
+                    p.Value = (double) Decimal.Parse(att[0]);
                     if (att[1] == "S")
                     {
                         p.Value = -p.Value;
