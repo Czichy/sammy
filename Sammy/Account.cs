@@ -88,6 +88,10 @@ namespace Sidi.Sammy
 
         public void Create()
         {
+            if (Exists)
+            {
+                throw new System.IO.IOException("Exists: " + DbPath);
+            }
             log.InfoFormat("Create user={0}", user);
             Directory.GetParent(DbPath).Create();
             settings = new Settings();
@@ -96,6 +100,14 @@ namespace Sidi.Sammy
             c.CreateSampleScript(w);
             settings.Script = w.ToString();
             Write();
+        }
+
+        public void Delete()
+        {
+            if (Exists)
+            {
+                File.Delete(DbPath);
+            }
         }
 
         public bool PromptForCredentials()

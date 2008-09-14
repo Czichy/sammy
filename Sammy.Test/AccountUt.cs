@@ -20,6 +20,9 @@ using NUnit.Framework;
 using Sidi.Sammy;
 using System.Reflection;
 using System.IO;
+using System.Data;
+using Sidi.Util;
+using Sidi.Persistence;
 
 namespace Sammy.Test
 {
@@ -40,6 +43,10 @@ namespace Sammy.Test
         public void Create()
         {
             Account a = new Account(user, pass);
+            if (a.Exists)
+            {
+                a.Delete();
+            }
             a.Create();
         }
 
@@ -51,6 +58,10 @@ namespace Sammy.Test
         {
             string script = "hello, script";
             Account a = new Account(user, pass);
+            if (a.Exists)
+            {
+                a.Delete();
+            }
             a.Create();
             a.Settings.Script = script;
             a.Write();
@@ -64,6 +75,10 @@ namespace Sammy.Test
         public void Hbci()
         {
             Account a = new Account(user, pass);
+            if (a.Exists)
+            {
+                a.Delete();
+            }
             a.Create();
             Collectors c = new Collectors();
             c.Payments = a.Payments;
@@ -74,11 +89,36 @@ namespace Sammy.Test
         public void Dkb()
         {
             Account a = new Account(user, pass);
+            if (a.Exists)
+            {
+                a.Delete();
+            }
             a.Create();
             Collectors c = new Collectors();
             c.Payments = a.Payments;
             c.ExecFile(@"D:\doc\office\Finanzen\test-dkb.command");
         }
 
+        class Schema
+        {
+            [RowId]
+            public long Id;
+
+            [Data]
+            public string sql;
+        }
+
+        [Test]
+        public void DbScheme()
+        {
+            Account a = new Account(user, pass);
+            if (a.Exists) { a.Delete(); }
+            a.Create();
+            Sidi.Persistence.Collection<Schema> schema = new Sidi.Persistence.Collection<Schema>(a.Payments.Connection, " sqlite_master");
+            foreach (Schema i in schema)
+            {
+                i.DumpProperties(Console.Out);
+            }
+        }
     }
 }

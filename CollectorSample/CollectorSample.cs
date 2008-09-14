@@ -41,7 +41,7 @@ namespace Sidi.Sammy.CollectorSample
             {
                 Payment p = new Payment();
                 p.Currency = "EUR";
-                p.Value = (Decimal)((r.NextDouble() -0.5)* 2000.0);
+                p.Value = ((r.NextDouble() -0.5)* 2000.0);
                 p.EntryDate = DateTime.Now;
                 p.ValueDate = DateTime.Now;
                 p.EntryText = r.String(16);

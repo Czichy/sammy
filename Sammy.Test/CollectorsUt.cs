@@ -49,9 +49,18 @@ namespace Sammy.Test
         public void TestCollectorSample()
         {
             ICollector c = new CollectorSample();
-            foreach (Payment i in c.GetPayments())
+            string path = Sidi.IO.Path.BinFile(@"test-data\test.sqlite");
+            if (File.Exists(path)) File.Delete(path);
+            Sidi.Persistence.Collection<Payment> pc = new Sidi.Persistence.Collection<Payment>(path);
+            IList<Payment> p = c.GetPayments();
+            foreach (Payment i in p)
             {
-                i.Print(Console.Out);
+                pc.Add(i);
+            }
+
+            foreach (Payment i in p)
+            {
+                Assert.AreEqual(true, pc.Contains(i));
             }
         }
     }

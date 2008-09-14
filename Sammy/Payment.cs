@@ -29,8 +29,14 @@ namespace Sidi.Sammy
         public long Id;
         [Data]
         public string Currency;
+        
+        /// <summary>
+        /// Amount that was transfered.
+        /// </summary>
+        /// Using data type Decimal would be better here, but sqlite cannot properly handle 
+        /// DECIMAL numbers. See http://sqlite.phxsoftware.com/forums/p/1296/5595.aspx#5595
         [Data]
-        public Decimal Value;
+        public Double Value;
         [Data]
         public DateTime EntryDate;
         [Data]
