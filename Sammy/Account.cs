@@ -25,7 +25,7 @@ using log4net;
 
 namespace Sidi.Sammy
 {
-    public class Account
+    public class Account : IDisposable
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -155,7 +155,6 @@ namespace Sidi.Sammy
             xmlw.Close();
             s.Close();
             Config<byte[]>()["script"] = m.ToArray();
-
         }
 
         public Sidi.Persistence.Dictionary<string, TValue> Config<TValue>()
@@ -197,6 +196,8 @@ namespace Sidi.Sammy
                 return Path.Combine(p, UserFileName + ".sqlite");
             }
         }
+
+
 
         public DateTime NextCollect
         {
@@ -246,5 +247,14 @@ namespace Sidi.Sammy
                 log.InfoFormat("Finished collecting statements for user {0}", User);
             }
         }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

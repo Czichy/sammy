@@ -112,13 +112,15 @@ namespace Sammy.Test
         public void DbScheme()
         {
             Account a = new Account(user, pass);
-            if (a.Exists) { a.Delete(); }
+            if (a.Exists) a.Delete();
             a.Create();
             Sidi.Persistence.Collection<Schema> schema = new Sidi.Persistence.Collection<Schema>(a.Payments.Connection, " sqlite_master");
             foreach (Schema i in schema)
             {
                 i.DumpProperties(Console.Out);
             }
+            schema.Close();
+            a.Delete();
         }
     }
 }
