@@ -99,6 +99,17 @@ namespace Sammy.Test
             c.ExecFile(@"D:\doc\office\Finanzen\test-dkb.command");
         }
 
+        [Test]
+        public void Html1822direkt()
+        {
+            Account a = new Account(user, pass);
+            if (a.Exists) { a.Delete(); }
+            a.Create();
+            Collectors c = new Collectors();
+            c.Payments = a.Payments;
+            c.ExecFile(@"D:\doc\office\Finanzen\test-1822direkt.command");
+        }
+
         class Schema
         {
             [RowId]

@@ -82,8 +82,10 @@ namespace Sidi.Sammy
                 if (id.Contains(key))
                 {
                     userInput.SetAttribute("value", value);
+                    return;
                 }
             }
+            throw new Exception(String.Format("input {0} not found", key));
         }
 
         public static void Check(this HtmlElement e, string key)

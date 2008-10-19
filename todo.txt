@@ -1,5 +1,7 @@
 Sammy TODO
 --------
+* write good installer
+* make all tests run (close db connections properly)
 * speed up DKB collector with more selective download
 * log viewer window
 
