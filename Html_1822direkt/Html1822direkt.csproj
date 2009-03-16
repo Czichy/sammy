@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2A502272-FF52-4DBB-B574-2243315456FB}</ProjectGuid>
+    <ProjectGuid>{919024D0-B7A0-4737-941D-30AFA83599DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sammy.Test</RootNamespace>
-    <AssemblyName>Sammy.Test</AssemblyName>
+    <RootNamespace>Html1822direkt</RootNamespace>
+    <AssemblyName>Html1822direkt</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <OutputPath>$(SolutionDir)..\build\$(SolutionName)\bin\$(Configuration)</OutputPath>
@@ -39,8 +39,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\log4net-1.2.10\bin\net\2.0\debug\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.4.7.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
-    <Reference Include="Sidi.Util, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1e33c1a5eebc53e1, processorArchitecture=MSIL">
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\NUnit-2.4.8-net-2.0\bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Sidi.Util, Version=0.1.3178.25785, Culture=neutral, PublicKeyToken=1e33c1a5eebc53e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Sidi.Util\bin\Release\Sidi.Util.dll</HintPath>
     </Reference>
@@ -59,18 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountUt.cs" />
-    <Compile Include="CollectorsUt.cs" />
-    <Compile Include="ScrapeFormsTest.cs" />
-    <Compile Include="SettingsUt.cs" />
+    <Compile Include="Html1822direkt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatementViewTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CollectorSample\CollectorSample.csproj">
-      <Project>{9B7323D1-6816-489D-9034-9F57E8BA1758}</Project>
-      <Name>CollectorSample</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Sammy\Sammy.csproj">
       <Project>{D58DB642-2143-441C-B0DA-0B0EA65A7F36}</Project>
       <Name>Sammy</Name>

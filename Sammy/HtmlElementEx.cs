@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Sidi.Sammy
 {
@@ -29,12 +30,24 @@ namespace Sidi.Sammy
             {
                 o.Write(" ");
             }
-            o.WriteLine(String.Format("{0} {1} class={2}", e.TagName, e.Id, e.GetAttribute("ClassName")));
+            o.WriteLine(String.Format("{0} {1} class={2} {3}", e.TagName, e.Id, e.GetAttribute("ClassName"), e.InnerText));
             ++indent;
             foreach (HtmlElement i in e.Children)
             {
                 i.Dump(o, indent);
             }
+        }
+
+        public static void Dump(this HtmlElement e, TextWriter o)
+        {
+            e.Dump(o, 0);
+        }
+
+        public static string Dump(this HtmlElement e)
+        {
+            StringWriter o = new StringWriter();
+            e.Dump(o, 0);
+            return o.ToString();
         }
 
         public delegate bool FilterFunc(HtmlElement e);
@@ -78,6 +91,7 @@ namespace Sidi.Sammy
             foreach (HtmlElement userInput in e.GetElementsByTagName("INPUT"))
             {
                 string id = userInput.Id;
+                if (String.IsNullOrEmpty(id)) id = userInput.Name;
                 if (String.IsNullOrEmpty(id)) id = String.Empty;
                 if (id.Contains(key))
                 {
@@ -139,11 +153,37 @@ namespace Sidi.Sammy
             return v == str;
         }
 
+        public static IEnumerable<Uri> GetLinks(this HtmlElement e)
+        {
+            foreach (HtmlElement i in e.FindAll(x => x.HasAttribute("href")))
+            {
+                yield return new Uri(e.Document.Url, i.GetAttribute("href"));
+            }
+        }
+
+        public static bool HasAttribute(this HtmlElement e, string attr)
+        {
+            string v = e.GetAttribute(attr);
+            return !String.IsNullOrEmpty(v);
+        }
+
         public static string GetSelectText(this HtmlElement select)
         {
             int index = Int32.Parse(select.GetAttribute("value"));
             return select.Children[index].InnerText;
         }
 
+        public static string FirstWord(this string text)
+        {
+            string[] s = Regex.Split(text, @"[^\w]+");
+            if (s.Length == 0)
+            {
+                return String.Empty;
+            }
+            else
+            {
+                return s[0];
+            }
+        }
     }
 }

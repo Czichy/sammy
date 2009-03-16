@@ -110,6 +110,11 @@ namespace Sidi.Sammy
             }
         }
 
+        public static Account DefaultAccount
+        {
+            get; set;
+        }
+
         public bool PromptForCredentials()
         {
             CredentialsDlg cred = new CredentialsDlg();

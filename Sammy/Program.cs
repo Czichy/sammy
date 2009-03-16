@@ -22,6 +22,10 @@ using System.Windows.Forms;
 using System.Threading;
 using log4net;
 using Pop3 = Sidi.Net.Pop3;
+using Sidi.IO;
+using log4net.Appender;
+using log4net.Layout;
+using System.IO;
 
 // Configure log4net using the .config file
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
@@ -38,6 +42,20 @@ namespace Sidi.Sammy
         [STAThread]
         static void Main(string[] args)
         {
+            // configure logging
+            {
+                RollingFileAppender a = new RollingFileAppender();
+                a.DatePattern = "yyyy-MM-dd";
+                a.AppendToFile = true;
+                a.StaticLogFileName = false;
+                a.File = Sidi.IO.Path.CatDir(new string[]{ Program.DataDirectory, "log", "log-"});
+                // Directory.GetParent(a.File).Create();
+                a.RollingStyle = RollingFileAppender.RollingMode.Date;
+                a.Layout = new PatternLayout("%date [%thread] %-5level %logger [%property{NDC}] - %message%newline");
+                a.ActivateOptions();
+                log4net.Config.BasicConfigurator.Configure(a);
+            }
+
             log.Info("Startup");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -48,6 +66,8 @@ namespace Sidi.Sammy
                 Account a = new Account(user, pass);
                 if (a.Exists && a.Read())
                 {
+                    Account.DefaultAccount = a;
+
                     // start collector thread
                     Thread collectorThread = new Thread
                     (
@@ -81,6 +101,16 @@ namespace Sidi.Sammy
             Application.Run(new MyApplicationContext());
             server.Stop();
             log.Info("Shutdown");
+        }
+
+        public static string DataDirectory
+        {
+            get
+            {
+                string p = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                p = System.IO.Path.Combine(p, Sammy.ApplicationName);
+                return p;
+            }
         }
     }
 }

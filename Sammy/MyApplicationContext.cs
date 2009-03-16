@@ -17,6 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using log4net.Appender;
+using System.IO;
+using log4net.Layout;
 
 namespace Sidi.Sammy
 {
@@ -25,12 +28,8 @@ namespace Sidi.Sammy
         public MyApplicationContext()
         {
             InitializeComponent();
-            notifyIcon.BalloonTipTitle = Sammy.ApplicationName;
-            notifyIcon.BalloonTipText = "Statements-as-Mail is running now.";
-            notifyIcon.ShowBalloonTip(5);
 
-            log4net.Config.BasicConfigurator.Configure(
-                new NotifyIconAppender(notifyIcon));
+            // log4net.Config.BasicConfigurator.Configure(new NotifyIconAppender(notifyIcon));
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -40,8 +39,18 @@ namespace Sidi.Sammy
 
         void ShowSettings()
         {
-            Account a = new Account();
-            if (a.PromptForCredentials())
+            Account a = Account.DefaultAccount;
+
+            if (a == null)
+            {
+                a = new Account();
+                if (!a.PromptForCredentials())
+                {
+                    a = null;
+                }
+            }
+
+            if (a != null)
             {
                 SettingsDlg s = new SettingsDlg(a);
                 s.ShowDialog();

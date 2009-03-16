@@ -48,6 +48,7 @@ namespace Sidi.Sammy
             this.buttonChangePassword = new System.Windows.Forms.Button();
             this.buttonHbci = new System.Windows.Forms.Button();
             this.buttonViewStatements = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxScript
@@ -120,6 +121,17 @@ namespace Sidi.Sammy
             this.buttonViewStatements.UseVisualStyleBackColor = true;
             this.buttonViewStatements.Click += new System.EventHandler(this.buttonViewStatements_Click);
             // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonUpdate.Location = new System.Drawing.Point(342, 306);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(104, 23);
+            this.buttonUpdate.TabIndex = 4;
+            this.buttonUpdate.Text = "&Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
             // SettingsDlg
             // 
             this.AcceptButton = this.buttonOk;
@@ -127,6 +139,7 @@ namespace Sidi.Sammy
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(810, 405);
+            this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonViewStatements);
             this.Controls.Add(this.buttonHbci);
@@ -149,5 +162,6 @@ namespace Sidi.Sammy
         public System.Windows.Forms.TextBox textBoxScript;
         private System.Windows.Forms.Button buttonHbci;
         private System.Windows.Forms.Button buttonViewStatements;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }

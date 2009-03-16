@@ -23,12 +23,20 @@ using System.IO;
 using System.Data;
 using Sidi.Util;
 using Sidi.Persistence;
+using log4net.Appender;
+using log4net.Layout;
 
 namespace Sammy.Test
 {
     [TestFixture]
     public class AccountUt
     {
+        public AccountUt()
+        {
+            DebugAppender a = new DebugAppender(new SimpleLayout());
+            log4net.Config.BasicConfigurator.Configure(a);
+        }
+
         [SetUp]
         public void Setup()
         {
@@ -107,6 +115,7 @@ namespace Sammy.Test
             a.Create();
             Collectors c = new Collectors();
             c.Payments = a.Payments;
+            ScrapeForm.ShowBrowser = true;
             c.ExecFile(@"D:\doc\office\Finanzen\test-1822direkt.command");
         }
 

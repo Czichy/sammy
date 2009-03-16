@@ -112,7 +112,11 @@ namespace Sidi.Sammy
         {
             try
             {
-                log.Info(Browser.Url);
+                if (!Browser.Url.Equals(e.Url))
+                {
+                    return;
+                }
+
                 timeoutTimer.Stop();    
                 timeoutTimer.Interval = (int) timeout.TotalMilliseconds;
                 timeoutTimer.Start();
@@ -124,7 +128,7 @@ namespace Sidi.Sammy
                 }
                 else
                 {
-                    log.Info(BodyHandler.Method.Name);
+                    log.InfoFormat("Handler: {0}", BodyHandler.Method.Name);
                     BodyHandler(b);
                 }
             }

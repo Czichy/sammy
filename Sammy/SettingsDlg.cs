@@ -86,5 +86,10 @@ namespace Sidi.Sammy
             StatementView v = new StatementView(account);
             v.ShowDialog();
         }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            account.NextCollect = DateTime.Now;
+        }
     }
 }
