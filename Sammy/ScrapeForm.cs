@@ -117,18 +117,19 @@ namespace Sidi.Sammy
                     return;
                 }
 
+                log.DebugFormat("Document completed: {0}", e.Url);
                 timeoutTimer.Stop();    
                 timeoutTimer.Interval = (int) timeout.TotalMilliseconds;
                 timeoutTimer.Start();
                 HtmlElement b = Browser.Document.Body;
                 if (BodyHandler == null)
                 {
-                    log.Info("scraping complete");
+                    log.Debug("scraping complete");
                     this.Close();
                 }
                 else
                 {
-                    log.InfoFormat("Handler: {0}", BodyHandler.Method.Name);
+                    log.DebugFormat("Handler: {0}", BodyHandler.Method.Name);
                     BodyHandler(b);
                 }
             }

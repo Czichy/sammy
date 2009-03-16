@@ -163,7 +163,11 @@ namespace Sidi.Sammy
 
         public void GetPayments(ICollector collector)
         {
-            AddPayments(collector.GetPayments());
+            log.InfoFormat("Start collecting with collector {0}", collector.GetType());
+            IList<Payment> payments = collector.GetPayments();
+            log.InfoFormat("Finished collecting with collector {0}. {1} transactions collected.", collector.GetType(), payments.Count);
+            AddPayments(payments);
+
         }
 
         public void AddPayments(IEnumerable<Payment> payments)
@@ -182,7 +186,7 @@ namespace Sidi.Sammy
                     StringWriter w = new StringWriter();
                     w.WriteLine("new:");
                     p.Print(w);
-                    log.Info(w.ToString());
+                    log.Debug(w.ToString());
                 }
                 else
                 {

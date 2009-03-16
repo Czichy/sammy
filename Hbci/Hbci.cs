@@ -83,7 +83,7 @@ namespace Sidi.Sammy.Hbci
 
         IList<Statement> DownloadStatement()
         {
-            log.Info("Download " + AccountId);
+            log.DebugFormat("Download {0}", AccountId);
             FinContact contact = FinContactFolder.Default.FindContact(AccountId);
             List<Statement> s = new List<Statement>();
             foreach (FinAcctInfo aAcctInfo in contact.UPD)
@@ -91,7 +91,7 @@ namespace Sidi.Sammy.Hbci
                 try
                 {
                     FinAcct acct = aAcctInfo.Acct;
-                    log.Info(String.Format("Downloading account {0}/{1}", acct.BankCode, acct.AcctNo));
+                    log.DebugFormat("Downloading account {0}/{1}", acct.BankCode, acct.AcctNo);
                     FinService service = new FinService(contact, acct.BankCode, acct.AcctNo, acct.Currency);
                     service.LogOn(Password);
                     FinAcctMvmtsSpecifiedPeriod aAcctMvmts = service.DownloadStatement(SwiftDate.NullDate);

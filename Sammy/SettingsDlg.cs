@@ -34,8 +34,14 @@ namespace Sidi.Sammy
             InitializeComponent();
             this.account = account;
             this.account.Read();
-            this.Text = String.Format("Settings for {0}", account.User);
             this.textBoxScript.Text = this.account.Settings.Script;
+            Update();
+        }
+
+        void Update()
+        {
+            this.Text = String.Format("Settings for {0}", account.User);
+            this.labelNextCollect.Text = String.Format("Next statement collection at {0}", this.account.NextCollect);
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
@@ -90,6 +96,7 @@ namespace Sidi.Sammy
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             account.NextCollect = DateTime.Now;
+            Update();
         }
     }
 }

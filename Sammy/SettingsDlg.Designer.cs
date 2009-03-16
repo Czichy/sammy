@@ -49,6 +49,7 @@ namespace Sidi.Sammy
             this.buttonHbci = new System.Windows.Forms.Button();
             this.buttonViewStatements = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
+            this.labelNextCollect = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxScript
@@ -132,6 +133,15 @@ namespace Sidi.Sammy
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
+            // labelNextCollect
+            // 
+            this.labelNextCollect.AutoSize = true;
+            this.labelNextCollect.Location = new System.Drawing.Point(12, 332);
+            this.labelNextCollect.Name = "labelNextCollect";
+            this.labelNextCollect.Size = new System.Drawing.Size(138, 13);
+            this.labelNextCollect.TabIndex = 5;
+            this.labelNextCollect.Text = "Next statement collection at";
+            // 
             // SettingsDlg
             // 
             this.AcceptButton = this.buttonOk;
@@ -139,6 +149,7 @@ namespace Sidi.Sammy
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(810, 405);
+            this.Controls.Add(this.labelNextCollect);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonViewStatements);
@@ -163,5 +174,6 @@ namespace Sidi.Sammy
         private System.Windows.Forms.Button buttonHbci;
         private System.Windows.Forms.Button buttonViewStatements;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Label labelNextCollect;
     }
 }
