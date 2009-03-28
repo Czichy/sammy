@@ -65,15 +65,23 @@ namespace Sidi.Sammy
                 }
             }
 
+            static string sammySender = "sammy@gmx.net";
+            static string sammyRecipient = "sammy-user@gmx.net";
+
+            static string UnknownIfEmpty(string text)
+            {
+                return String.IsNullOrEmpty(text) ? "unknown" : text;
+            }
+            
             void WriteHeader(TextWriter w)
             {
                 Payment p = payment;
-                w.WriteLine(String.Format("Date:     {0}", p.EntryDate.ToString("R")));
-                w.WriteLine(String.Format("From:     \"{0}\" <sammy@localhost>", p.Name.OneLine(80)));
-                w.WriteLine("Sender:   sammy@localhost");
-                w.WriteLine(String.Format("To:     \"{0}\" <sammy-user@localhost>", p.OwnName.OneLine(80)));
-                w.WriteLine(String.Format("Subject:   {0:0.00} {1} {2}", p.Value, p.Currency, p.Purpose.OneLine(256)));
-                w.WriteLine(String.Format("Message-ID:  <{0}@sammy>", p.Digest));
+                w.WriteLine("Date:     {0}", p.EntryDate.ToString("R"));
+                w.WriteLine("From:     \"{0}\" <{1}>", UnknownIfEmpty(p.Name).OneLine(80), sammySender);
+                w.WriteLine("Sender:   {0}", sammySender);
+                w.WriteLine("To:     \"{0}\" <{1}>", UnknownIfEmpty(p.OwnName).OneLine(80), sammyRecipient);
+                w.WriteLine("Subject:   {0:0.00} {1} {2}", p.Value, p.Currency, p.Purpose.OneLine(256));
+                w.WriteLine("Message-ID:  <{0}@sammy>", p.Digest);
                 w.WriteLine();
             }
 

@@ -26,6 +26,8 @@ using Sidi.IO;
 using log4net.Appender;
 using log4net.Layout;
 using System.IO;
+using log4net.Repository.Hierarchy;
+using log4net.Core;
 
 // Configure log4net using the .config file
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
@@ -54,6 +56,9 @@ namespace Sidi.Sammy
                 a.Layout = new PatternLayout("%date [%thread] %-5level %logger [%property{NDC}] - %message%newline");
                 a.ActivateOptions();
                 log4net.Config.BasicConfigurator.Configure(a);
+
+                Hierarchy repository = log4net.LogManager.GetLoggerRepository() as Hierarchy;
+                repository.Root.Level = Level.Debug;
             }
 
             log.Info("Startup");

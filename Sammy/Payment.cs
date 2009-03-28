@@ -25,6 +25,8 @@ namespace Sidi.Sammy
 {
     public class Payment
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         [RowId]
         public long Id;
         [Data]
@@ -92,6 +94,7 @@ namespace Sidi.Sammy
             {
                 MemoryStream m = new MemoryStream();
                 StreamWriter w = new StreamWriter(m);
+                w.WriteLine(Id);
                 w.WriteLine(Value);
                 w.WriteLine(EntryDate);
                 w.WriteLine(AcctNo);
@@ -99,7 +102,9 @@ namespace Sidi.Sammy
                 w.WriteLine(Purpose);
                 w.Flush();
                 m.Seek(0, SeekOrigin.Begin);
-                return md5.ComputeHash(m).HexString();
+                string d = md5.ComputeHash(m).HexString();
+                log.Debug(d);
+                return d;
             }
         }
     }
