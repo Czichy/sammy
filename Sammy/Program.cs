@@ -50,7 +50,7 @@ namespace Sidi.Sammy
                 a.DatePattern = "yyyy-MM-dd";
                 a.AppendToFile = true;
                 a.StaticLogFileName = false;
-                a.File = Sidi.IO.Path.CatDir(new string[]{ Program.DataDirectory, "log", "log-"});
+                a.File = FileUtil.CatDir(new string[]{ Program.DataDirectory, "log", "log-"});
                 // Directory.GetParent(a.File).Create();
                 a.RollingStyle = RollingFileAppender.RollingMode.Date;
                 a.Layout = new PatternLayout("%date [%thread] %-5level %logger [%property{NDC}] - %message%newline");

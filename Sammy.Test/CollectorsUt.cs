@@ -21,6 +21,7 @@ using Sidi.Sammy;
 using System.Reflection;
 using System.IO;
 using Sidi.Sammy.CollectorSample;
+using Sidi.IO;
 
 namespace Sammy.Test
 {
@@ -49,7 +50,7 @@ namespace Sammy.Test
         public void TestCollectorSample()
         {
             ICollector c = new CollectorSample();
-            string path = Sidi.IO.Path.BinFile(@"test-data\test.sqlite");
+            string path = FileUtil.BinFile(@"test-data\test.sqlite");
             if (File.Exists(path)) File.Delete(path);
             Sidi.Persistence.Collection<Payment> pc = new Sidi.Persistence.Collection<Payment>(path);
             IList<Payment> p = c.GetPayments();
