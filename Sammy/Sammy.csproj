@@ -120,7 +120,6 @@
     <Compile Include="StatementView.Designer.cs">
       <DependentUpon>StatementView.cs</DependentUpon>
     </Compile>
-    <Compile Include="TcpClientEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ChangePasswordDlg.resx">
