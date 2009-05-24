@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<project SchemaVersion="2.0">
+    <assemblies>
+        <assembly location="..\..\Build\sammy\bin\Release\Sammy.exe" documentation="..\..\Build\sammy\bin\Release\Sammy.xml" />
+    </assemblies>
+    <referencePaths>
+        <referencePath path="..\Libraries\**" />
+    </referencePaths>
+    <namespaces>
+    </namespaces>
+    <documenters>
+        <documenter name="MSDN-CHM">
+            <property name="RootPageFileName" value=".\Overview.html" />
+            <property name="SdkLinksOnWeb" value="True" />
+            <property name="OutputDirectory" value="..\..\Build\sammy\bin\Release" />
+            <property name="HtmlHelpName" value="sammy" />
+            <property name="Title" value="sammy" />
+            <property name="AssemblyVersionInfo" value="AssemblyVersion" />
+            <property name="CopyrightText" value="http://code.google.com/p/sammy/" />
+            <property name="CopyrightHref" value="http://code.google.com/p/sammy/" />
+            <property name="DocumentedAttributes" value="Output|Required" />
+        </documenter>
+    </documenters>
+</project>
