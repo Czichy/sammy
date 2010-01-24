@@ -25,18 +25,8 @@ using Sidi.CommandLine;
 namespace Sidi.Sammy.Test
 {
     [TestFixture]
-    public class SettingsUt
+    public class SettingsUt : TestBase
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
         [Test]
         public void Instructions()
         {

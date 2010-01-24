@@ -24,7 +24,7 @@ using System.IO;
 namespace Sidi.Sammy.Test
 {
     [TestFixture]
-    public class StatementViewTest
+    public class StatementViewTest : TestBase
     {
         [SetUp]
         public void Setup()

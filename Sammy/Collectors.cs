@@ -163,11 +163,17 @@ namespace Sidi.Sammy
 
         public void GetPayments(ICollector collector)
         {
-            log.InfoFormat("Start collecting with collector {0}", collector.GetType());
-            IList<Payment> payments = collector.GetPayments();
-            log.InfoFormat("Finished collecting with collector {0}. {1} transactions collected.", collector.GetType(), payments.Count);
-            AddPayments(payments);
-
+            try
+            {
+                log.InfoFormat("Start collecting with collector {0}", collector.GetType());
+                IList<Payment> payments = collector.GetPayments();
+                log.InfoFormat("Finished collecting with collector {0}. {1} transactions collected.", collector.GetType(), payments.Count);
+                AddPayments(payments);
+            }
+            catch (Exception ex)
+            {
+                log.Error(String.Format("error in collector {0}.", collector.GetType()), ex);
+            }
         }
 
         public void AddPayments(IEnumerable<Payment> payments)

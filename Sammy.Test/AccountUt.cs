@@ -26,27 +26,11 @@ using Sidi.Persistence;
 using log4net.Appender;
 using log4net.Layout;
 
-namespace Sammy.Test
+namespace Sidi.Sammy.Test
 {
     [TestFixture]
-    public class AccountUt
+    public class AccountUt : TestBase
     {
-        public AccountUt()
-        {
-            DebugAppender a = new DebugAppender(new SimpleLayout());
-            log4net.Config.BasicConfigurator.Configure(a);
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
         [Test]
         public void Create()
         {
@@ -122,10 +106,10 @@ namespace Sammy.Test
         class Schema
         {
             [RowId]
-            public long Id;
+            public long Id = 0;
 
             [Data]
-            public string sql;
+            public string sql = null;
         }
 
         [Test]
@@ -140,7 +124,6 @@ namespace Sammy.Test
                 i.DumpProperties(Console.Out);
             }
             schema.Close();
-            a.Delete();
         }
     }
 }

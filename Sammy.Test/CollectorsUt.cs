@@ -20,24 +20,13 @@ using NUnit.Framework;
 using Sidi.Sammy;
 using System.Reflection;
 using System.IO;
-using Sidi.Sammy.CollectorSample;
 using Sidi.IO;
 
-namespace Sammy.Test
+namespace Sidi.Sammy.Test
 {
     [TestFixture]
-    public class CollectorsUt
+    public class CollectorsUt : TestBase
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
         [Test]
         public void TestGetCollector()
         {
@@ -49,7 +38,7 @@ namespace Sammy.Test
         [Test]
         public void TestCollectorSample()
         {
-            ICollector c = new CollectorSample();
+            ICollector c = new Sidi.Sammy.CollectorSample.CollectorSample();
             string path = FileUtil.BinFile(@"test-data\test.sqlite");
             if (File.Exists(path)) File.Delete(path);
             Sidi.Persistence.Collection<Payment> pc = new Sidi.Persistence.Collection<Payment>(path);

@@ -27,18 +27,8 @@ using System.Threading;
 namespace Sidi.Sammy.Test
 {
     [TestFixture]
-    public class ScrapeFormsTest
+    public class ScrapeFormsTest : TestBase
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
         [Test]
         public void ScrapeFormTest1()
         {
