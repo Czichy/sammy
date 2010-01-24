@@ -31,10 +31,10 @@ namespace Sidi.Sammy.Test
     [TestFixture]
     public class AccountUt : TestBase
     {
-        [Test]
-        public void Create()
+        [SetUp]
+        public void SetUp()
         {
-            Account a = new Account(user, pass);
+            a = new Account(user, pass);
             if (a.Exists)
             {
                 a.Delete();
@@ -42,65 +42,61 @@ namespace Sidi.Sammy.Test
             a.Create();
         }
 
-        string user = "test-name";
-        string pass = "test-pass";
+        [TearDown]
+        public void TearDown()
+        {
+            a.Dispose();
+        }
+
+        Account a;
+
+        [Test]
+        public void Create()
+        {
+            if (a.Exists)
+            {
+                a.Delete();
+            }
+            a.Create();
+        }
 
         [Test]
         public void ReadWrite()
         {
             string script = "hello, script";
-            Account a = new Account(user, pass);
-            if (a.Exists)
-            {
-                a.Delete();
-            }
-            a.Create();
             a.Settings.Script = script;
             a.Write();
 
-            Account b = new Account(user, pass);
-            b.Read();
-            Assert.AreEqual(script, b.Settings.Script);
+            using (Account b = new Account(user, pass))
+            {
+                b.Read();
+                Assert.AreEqual(script, b.Settings.Script);
+            }
         }
 
         [Test]
         public void Hbci()
         {
-            Account a = new Account(user, pass);
-            if (a.Exists)
-            {
-                a.Delete();
-            }
-            a.Create();
             Collectors c = new Collectors();
             c.Payments = a.Payments;
-            c.ExecFile(@"D:\doc\office\Finanzen\test-hbci.command");
+            c.ExecFile(SecretFile("test-hbci.command"));
         }
 
         [Test]
         public void Dkb()
         {
-            Account a = new Account(user, pass);
-            if (a.Exists)
-            {
-                a.Delete();
-            }
-            a.Create();
             Collectors c = new Collectors();
             c.Payments = a.Payments;
-            c.ExecFile(@"D:\doc\office\Finanzen\test-dkb.command");
+            c.ExecFile(SecretFile("test-dkb.command"));
         }
 
-        [Test]
+        [Test, Explicit("")]
         public void Html1822direkt()
         {
-            Account a = new Account(user, pass);
-            if (a.Exists) { a.Delete(); }
-            a.Create();
             Collectors c = new Collectors();
             c.Payments = a.Payments;
             ScrapeForm.ShowBrowser = true;
-            c.ExecFile(@"D:\doc\office\Finanzen\test-1822direkt.command");
+            c.ExecFile(SecretFile("test-1822direkt.command"));
         }
 
         class Schema
@@ -115,9 +111,6 @@ namespace Sidi.Sammy.Test
         [Test]
         public void DbScheme()
         {
-            Account a = new Account(user, pass);
-            if (a.Exists) a.Delete();
-            a.Create();
             Sidi.Persistence.Collection<Schema> schema = new Sidi.Persistence.Collection<Schema>(a.Payments.Connection, " sqlite_master");
             foreach (Schema i in schema)
             {

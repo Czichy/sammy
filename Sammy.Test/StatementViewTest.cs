@@ -26,17 +26,7 @@ namespace Sidi.Sammy.Test
     [TestFixture]
     public class StatementViewTest : TestBase
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-        }
-
-        [Test]
+        [Test, Explicit("interactive")]
         public void View()
         {
             Account a = new Account(user, pass);
@@ -44,7 +34,5 @@ namespace Sidi.Sammy.Test
             v.ShowDialog();
         }
 
-        string user = "test-name";
-        string pass = "test-pass";
     }
 }

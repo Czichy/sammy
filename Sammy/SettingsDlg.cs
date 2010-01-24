@@ -38,7 +38,7 @@ namespace Sidi.Sammy
             Update();
         }
 
-        void Update()
+        new void Update()
         {
             this.Text = String.Format("Settings for {0}", account.User);
             this.labelNextCollect.Text = String.Format("Next statement collection at {0}", this.account.NextCollect);

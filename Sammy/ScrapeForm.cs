@@ -52,6 +52,7 @@ namespace Sidi.Sammy
         /// </summary>
         private void InitializeComponent()
         {
+            var c = components;
         }
     }
 

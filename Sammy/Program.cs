@@ -57,7 +57,7 @@ namespace Sidi.Sammy
                 a.ActivateOptions();
                 log4net.Config.BasicConfigurator.Configure(a);
 
-                Hierarchy repository = log4net.LogManager.GetLoggerRepository() as Hierarchy;
+                Hierarchy repository = log4net.LogManager.GetRepository() as Hierarchy;
                 repository.Root.Level = Level.Debug;
             }
 

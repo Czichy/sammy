@@ -22,6 +22,9 @@ using System.Windows.Forms;
 using System.Xml;
 using Sidi.Persistence;
 using log4net;
+using System.Data.Common;
+using System.Data.SQLite;
+using Sidi.IO;
 
 namespace Sidi.Sammy
 {
@@ -47,7 +50,7 @@ namespace Sidi.Sammy
         {
             get
             {
-                return new Collection<Payment>(DbPath);
+                return new Collection<Payment>(DbConnection);
             }
         }
 
@@ -55,7 +58,7 @@ namespace Sidi.Sammy
         {
             get
             {
-                return new Collection<PaymentMailBox.ReadFlag>(DbPath);
+                return new Collection<PaymentMailBox.ReadFlag>(DbConnection);
             }
         }
 
@@ -82,7 +85,7 @@ namespace Sidi.Sammy
         {
             get
             {
-                return File.Exists(DbPath);   
+                return File.Exists(DbFile);   
             }
         }
 
@@ -90,10 +93,10 @@ namespace Sidi.Sammy
         {
             if (Exists)
             {
-                throw new System.IO.IOException("Exists: " + DbPath);
+                throw new System.IO.IOException("Exists: " + DbConnection);
             }
             log.InfoFormat("Create user={0}", user);
-            Directory.GetParent(DbPath).Create();
+            DbFile.EnsureParentDirectoryExists();
             settings = new Settings();
             Collectors c = new Collectors();
             StringWriter w = new StringWriter();
@@ -106,13 +109,23 @@ namespace Sidi.Sammy
         {
             if (Exists)
             {
-                File.Delete(DbPath);
+                Close();
+                File.Delete(DbFile);
+            }
+        }
+
+        void Close()
+        {
+            if (dbConnection != null)
+            {
+                dbConnection.Close();
+                dbConnection = null;
             }
         }
 
         public static Account DefaultAccount
         {
-            get; set;
+           get; set;
         }
 
         public bool PromptForCredentials()
@@ -164,7 +177,7 @@ namespace Sidi.Sammy
 
         public Sidi.Persistence.Dictionary<string, TValue> Config<TValue>()
         {
-            return new Sidi.Persistence.Dictionary<string, TValue>(DbPath, "config");
+            return new Sidi.Persistence.Dictionary<string, TValue>(DbConnection, "config");
         }
         
         public bool Read()
@@ -192,7 +205,21 @@ namespace Sidi.Sammy
             }
         }
 
-        string DbPath
+        DbConnection DbConnection
+        {
+            get
+            {
+                if (dbConnection == null)
+                {
+                    Collection<Payment> c = new Collection<Payment>(DbFile);
+                    dbConnection = c.Connection;
+                }
+                return dbConnection;
+            }
+        }
+        DbConnection dbConnection;
+
+        string DbFile
         {
             get
             {
@@ -201,8 +228,6 @@ namespace Sidi.Sammy
                 return Path.Combine(p, UserFileName + ".sqlite");
             }
         }
-
-
 
         public DateTime NextCollect
         {
@@ -257,7 +282,7 @@ namespace Sidi.Sammy
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Close();
         }
 
         #endregion
