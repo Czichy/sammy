@@ -10,5 +10,5 @@
 
   <Import Project="Common.Targets"/>
   <Import Project="$(MSBuildExtensionsPath)\sidi-util\google.code.Targets"/>
-
+  <Target Name="UnitTest" />
 </Project>
