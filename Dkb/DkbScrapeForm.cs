@@ -81,8 +81,8 @@ namespace Sidi.Sammy.Dkb
         public void login(HtmlElement b)
         {
             BodyHandler = this.LogonFinished;
-            b.SetInput("username", User);
-            b.SetInput("password", Password);
+            b.SetInput("j_username", User);
+            b.SetInput("j_password", Password);
             b.ClickButton("buttonlogin");
         }
 

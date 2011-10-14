@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutputPath>$(SolutionDir)..\..\build\$(SolutionName)_$(Configuration)</OutputPath>
+    <IntermediateOutputPath>$(TEMP)\build\$(AssemblyName)\obj\$(Configuration)\</IntermediateOutputPath>
+	<LibDir>$(SolutionDir)..\lib\</LibDir>
+    <NoWarn>1591</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+	</PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+	
+	
+	<ItemGroup>
+    <Reference Include="log4net">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LibDir)log4net-1.2.10\bin\net\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Sidi.Util">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(LibDir)sidi-util\Sidi.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SQLite\bin\System.Data.SQLite.DLL</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

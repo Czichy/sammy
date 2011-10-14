@@ -110,8 +110,8 @@ namespace screen_scrape
         public void login(HtmlElement b)
         {
             bodyHandler = this.LogonFinished;
-            b.SetInput("username", this.User);
-            b.SetInput("password", this.Password);
+            b.SetInput("j_username", this.User);
+            b.SetInput("j_password", this.Password);
             b.ClickButton("buttonlogin");
         }
 

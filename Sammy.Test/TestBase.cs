@@ -22,7 +22,7 @@ namespace Sidi.Sammy.Test
 
         public string SecretFile(string name)
         {
-            return @"D:\office\Finanzen".CatDir(name);
+            return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).CatDir(@"office\Finanzen", name);
         }
     }
 }
