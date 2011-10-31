@@ -90,6 +90,14 @@ namespace Sidi.Sammy.Test
             c.ExecFile(SecretFile("test-dkb.command"));
         }
 
+        [Test]
+        public void Postbank()
+        {
+            Collectors c = new Collectors();
+            c.Payments = a.Payments;
+            c.ExecFile(SecretFile("test-Postbank.command"));
+        }
+
         [Test, Explicit("")]
         public void Html1822direkt()
         {
